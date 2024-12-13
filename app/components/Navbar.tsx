@@ -6,7 +6,7 @@ import { auth, signIn, signOut } from "@/auth";
 
 const Navbar = async () => {
   const session = await auth(); // Get the session details
-  console.log(session);
+  // console.log(session);
   return (
     <header className="px-5 py-3 bg-white shadow-sm font-work-sans">
       <nav className="flex justify-between items-center">
@@ -31,9 +31,11 @@ const Navbar = async () => {
                 </button>
               </form>
 
-              <Link href={`/user/${session?.id}`}>
+              <Link href={`/user/${session?.name}`}>
                 <span>{session?.user?.name}</span>
+                {/* <Image src={session?.user?.image} alt="logo" width={30} height={30} /> */}
               </Link>
+
             </>
           ) : (
             <form
