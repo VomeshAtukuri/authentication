@@ -1,8 +1,6 @@
-
 import Link from "next/link";
 import Image from "next/image";
 import { auth, signIn, signOut } from "@/auth";
-
 
 const Navbar = async () => {
   const session = await auth(); // Get the session details
@@ -15,7 +13,7 @@ const Navbar = async () => {
         </Link>
 
         <div className="flex items-center gap-5 text-black">
-          {session && session?.user ? (
+          {session && session?.user? (
             <>
               <Link href="/startup/create">
                 <span>Create</span>
@@ -23,7 +21,7 @@ const Navbar = async () => {
               <form
                 action={async () => {
                   "use server";
-                  await signOut({ callbackUrl: "/" });
+                  await signOut({ redirectTo: "/" });
                 }}
               >
                 <button type="submit">
@@ -31,11 +29,9 @@ const Navbar = async () => {
                 </button>
               </form>
 
-              <Link href={`/user/${session?.name}`}>
+              <Link href={`/user/${session?.user?.name}`}>
                 <span>{session?.user?.name}</span>
-                {/* <Image src={session?.user?.image} alt="logo" width={30} height={30} /> */}
               </Link>
-
             </>
           ) : (
             <form
